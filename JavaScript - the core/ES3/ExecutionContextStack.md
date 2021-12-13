@@ -120,3 +120,5 @@ And again the function expression `baz` is not included into the variable/activa
 - [How JavaScript Code is executed & Call Stack ](https://www.youtube.com/watch?v=iLWTnMzWtj4&list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP&index=3&ab_channel=AkshaySaini)
 
 - [How JavaScript Works & Execution Context](https://www.youtube.com/watch?v=ZvbzSrg0afE&list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP&index=3&ab_channel=AkshaySaini)
+
+- [Demo of Call Stack in the Browser](https://youtu.be/Fnlnw8uY6jo?t=852)
