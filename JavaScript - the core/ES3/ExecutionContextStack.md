@@ -1,3 +1,6 @@
+> JavaScript is a **_synchronous single-threaded_** language.
+> Synchronous Single-threaded: JS can only process one command at a time, and that too in a specific order.
+
 # Execution Context Stack
 
 There are three types of ECMAScript code: _global_ code, _function_ code and _eval_ code. Every code is evaluated in its execution context. There is only one global context and may be many instances of function and eval execution contexts. Every call of a function, enters the function execution context and evaluates the function code type. Every call of `eval` function, enters the eval execution context and evaluates its code.
@@ -19,6 +22,8 @@ foo(30);
 ```
 
 An execution context may activate another context, e.g. a function calls another function (or the global context calls a global function), and so on. Logically, this is implemented as a stack, which is called the execution context stack.
+
+> Execution Context Stack = Call Stack = Program Stack = Control Stack = Runtime Stack = Machine Stack
 
 A context which activates another context is called a caller. A context is being activated is called a callee. A callee at the same time may be a _caller_ of some other _callee_ (e.g. a function called from the global context, calls then some inner function).
 
@@ -103,3 +108,15 @@ foo(10, 20);
 We have the next activation object(AO) of the `foo` function context:
 
 ![Figure 3. A constructor and object relationship.](../../Assets/activation-object.png)
+
+And again the function expression `baz` is not included into the variable/activate object.
+
+> Notice, in ES5 the concepts of variable object, and activation object are combined into the **lexical environments model**.
+
+### Additional Resources
+
+###### 📺 Videos:
+
+- [How JavaScript Code is executed & Call Stack ](https://www.youtube.com/watch?v=iLWTnMzWtj4&list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP&index=3&ab_channel=AkshaySaini)
+
+- [How JavaScript Works & Execution Context](https://www.youtube.com/watch?v=ZvbzSrg0afE&list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP&index=3&ab_channel=AkshaySaini)
