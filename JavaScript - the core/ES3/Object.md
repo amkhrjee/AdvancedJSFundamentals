@@ -58,3 +58,25 @@ c.calculate(40); //80
 ```
 
 Easy enough, isn’t it? We see that `b` and `c` have access to the calculate method which is defined in `a` object. And this is achieved exactly via this prototype chain.
+
+The rule is simple: if a property or a method is not found in the object itself(i.e. the object has no such an own property), then there is an attempt to find this property/method in the prototype chain.If the property is not found in the prototype, then a prototype of the prototype is considered, and so on, i.e. the whole prototype chain (absolutely the same is made in class-based inheritance, when resolving an inherited method — there we go through the class chain).The first found property/method with the same name is used. Thus, a found property is called _inherited_ property. If the property is not found after the whole prototype chain lookup, then `undefined` value is returned.
+
+> Notice that `this` value in using an inherited method is set to the `original` object, but not to the prototype object in which the method is found.
+> i.e. In this example above `this.y` is taken from `b` and `c`, but not from `a`. However, `this.x` is taken from `a`, and again via the _prototype chain_ mechanism.
+
+If a prototype is not specified for an object explicitly, then the default value for `__proto__` is taken — `Object.prototype`. Object Object.prototype itself also has a `__proto__`, which is the final link of a chain and is set to `null`.
+
+The next figure shows the inheritance hierarchy of our `a`, `b` and `c` objects:
+
+![Figure 1. A basic object with a prototype.](../Assets/prototype-chain.png)
+
+> **NOTICE** ES5 standardized an alternative way for prototype-based inheritance using Object.create function:
+
+> ```js
+> var b = Object.create(a, { y: { value: 20 } });
+> var c = Object.create(a, { y: { value: 30 } });
+> ```
+
+> ES6 though standardizes the `__proto__`, and it can be used at initialization of objects.
+
+Often it is needed to have objects with the _same or similar state structure_ (i.e. the same set of properties), and with different state values. In this case we may use a constructor function which produces objects by _specified_ pattern.
