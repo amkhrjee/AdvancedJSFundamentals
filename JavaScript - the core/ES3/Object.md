@@ -19,7 +19,7 @@ var foo = {
 
 we have the structure with _two_ explicit _own_ properties and one implicit `__proto__` property, which is the reference to the prototype of `foo`:
 
-![Figure 1. A basic object with a prototype.](../Assets/basic-object.png)
+![Figure 1. A basic object with a prototype.](../../Assets/basic-object.png)
 
 What are these prototypes needed for? Let's consider a _prototype chain_ concept to anser this question.
 
@@ -68,7 +68,7 @@ If a prototype is not specified for an object explicitly, then the default value
 
 The next figure shows the inheritance hierarchy of our `a`, `b` and `c` objects:
 
-![Figure 1. A basic object with a prototype.](../Assets/prototype-chain.png)
+![Figure 1. A basic object with a prototype.](../../Assets/prototype-chain.png)
 
 > **NOTICE** ES5 standardized an alternative way for prototype-based inheritance using Object.create function:
 
