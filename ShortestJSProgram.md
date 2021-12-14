@@ -13,4 +13,9 @@ In a function/constructor, `this` points to objects specfic to the execution con
 ```js
 //in the global context
 this === window; //true
+
+//also
+var a = 10;
+
+console.log((window.a == a) == this.a); //true
 ```
