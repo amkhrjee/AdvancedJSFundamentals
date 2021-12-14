@@ -9,3 +9,5 @@ This means the variable does not exist in the memory space at all. And hence the
 ### "JavaScript is a loosly typed languange" - what does that mean?
 
 This means JS engines do not assign any particular datatype to a variable when it allocates memory to the varibale.
+
+Coercion | Lexical Envioronment | 

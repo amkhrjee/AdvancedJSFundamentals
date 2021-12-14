@@ -1,12 +1,15 @@
 function a() {
-  var b = "haha";
+  // var b = "haha";
   //   console.log(b);
+  var b = 100;
+
   c();
   function c() {
-    var b = "lmao";
+    // var b = "lmao";
 
     //   var b = 20;
     console.log(b);
   }
 }
-var b = 100;
+
+a();

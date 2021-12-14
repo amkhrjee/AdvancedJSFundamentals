@@ -1,4 +1,4 @@
-# What is lexical scope?
+# **What is lexical scope?**
 
 I understand them through examples. :)
 
