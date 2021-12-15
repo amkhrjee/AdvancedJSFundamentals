@@ -44,3 +44,41 @@ function(){
 ```
 
 ## ➡️ Named Function Expression
+
+It's like FE but instead of an anonymous function, we use a function with a name.
+
+```js
+var b = function name() {
+  //
+};
+```
+
+> ⚠️ Caveat: You will get an error if you try to do `name()`. It's fine to do `b()` though.
+>
+> ```
+> Uncaught ReferenceError: name is not defined
+> ```
+>
+> This happens because `name` is not created as a function in the scope rather as a variable.
+
+## ⚡Difference between Parameters and Arguments
+
+We will understand this with a simple example!
+
+```js
+function nameOfFunction(thisIsParameter, anotherParameter) {
+  //do something
+}
+
+nameOfFunction(thisIsArgument, anotherArgument);
+```
+
+Hope it's clear now!
+
+## ➡️ First Class Functions 🤵🏻‍♂️
+
+> Same as saying "_Functions are first-class citizens_"
+
+A programming language is said to have First-class functions when functions in that language are treated like any other variable. For example, in such a language, a function can be passed as an argument to other functions, can be returned by another function and can be assigned as a value to a variable.
+
+> Source: [MDN first-class functions](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function)
