@@ -115,3 +115,5 @@ Here we have encapsulated `setTimeout` within a function. We pass that function 
 4
 5
 ```
+
+//todo: data hiding, encapsulation, garabage collection, memory leaks
