@@ -19,39 +19,37 @@ As JS has to be run in different devices and environments, there are several JS 
 
 Different JavaScript Engines have different implementations and different set of features, but we can still generalize all JS engines for the sake of simplicity and getting an idea of their general architecture.
 
-/_
 ┌─────────────────────────┐
-│ │
-│ Code │
-│ │
+│                         │
+│           Code          │
+│                         │
 └────────────┬────────────┘
-│
-│
-│ ┌─────────────────────────────┐
-┌────────────▼─────────────┬───────────►│ │
-│ │ │ Code is broken down │
-│ Parsing ├───────────►│ into tokens. │
-│ │ │ │
+             │
+             │
+             │                          ┌─────────────────────────────┐
+┌────────────▼─────────────┬───────────►│                             │
+│                          │            │      Code is broken down    │
+│        Parsing           ├───────────►│      into tokens.           │
+│                          │            │                             │
 └─────────────┬────────────┴───────────►└──────────────┬──────────────┘
-│ │
-│ │
-│ │
-│ │
-┌─────────────▼────────────┐ ┌─────────────▼──────────────┐
-│ │ │ │
-│ Compilation │ │ Syntax Parser │
-│ │ │ │
-└─────────────┬────────────┘ └─────────────┬──────────────┘
-│ │
-│ │
-│ │
-│ │
-│ │
-┌────────────▼────────────┐ ┌─────────────▼─────────────────┐
-│ │ │ │
-│ Execution │ │ Converts code to AST. │
-│ │ │ │
-└─────────────────────────┘ │ AST = Abstact Syntax Tree │
-│ │
-└───────────────────────────────┘
-_/
+              │                                        │
+              │                                        │
+              │                                        │
+              │                                        │
+┌─────────────▼────────────┐             ┌─────────────▼──────────────┐
+│                          │             │                            │
+│       Compilation        │             │        Syntax Parser       │
+│                          │             │                            │
+└─────────────┬────────────┘             └─────────────┬──────────────┘
+              │                                        │
+              │                                        │
+              │                                        │
+              │                                        │
+              │                                        │
+ ┌────────────▼────────────┐             ┌─────────────▼─────────────────┐
+ │                         │             │                               │
+ │      Execution          │             │   Converts code to AST.       │
+ │                         │             │                               │
+ └─────────────────────────┘             │   AST = Abstact Syntax Tree   │
+                                         │                               │
+                                         └───────────────────────────────┘
