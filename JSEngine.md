@@ -60,3 +60,9 @@ Interpreter is by nature faster than a compiler.
 Well, none of them.
 
 > JavaScript uses the best of both worlds and uses something called as **_Just In-time Compilation_** or **_JIT Compilation_**.
+
+## ▶️ Execution
+
+The byte code produced by the compilation process is passed onto the execution phase.
+
+The major two components of the execution phase is the **Memory Heap** and the **Call Stack**.

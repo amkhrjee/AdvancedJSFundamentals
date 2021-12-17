@@ -1,8 +1,16 @@
-function attachEventListner() {
-  let count = 0;
-  document.getElementById("clickMe").addEventListener("click", function x() {
-    console.log("Click kardiya!!!", ++count);
-  });
+console.log("start");
+
+setTimeout(function cb() {
+  console.log("Callback");
+}, 1000);
+
+console.log("End");
+
+let startDate = new Date().getTime();
+let endDate = startDate;
+//blocking the main thread for 10 seconds
+while (endDate < startDate + 10000) {
+  endDate = new Date().getTime();
 }
 
-attachEventListner();
+console.log("While expires");
