@@ -1,4 +1,4 @@
-# 🏄‍♂️ Let's dive deep into the world of functions - the 💖 of JS!
+# 🏄‍♂️ Let's dive deep into the world of functions!
 
 ## ➡️ Function Statement
 
