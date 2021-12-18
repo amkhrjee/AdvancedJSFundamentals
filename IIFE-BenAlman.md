@@ -1,4 +1,4 @@
-> The following have been taken from [Ben Alman's blog](https://web.archive.org/web/20171201033208/http://benalman.com/news/2010/11/immediately-invoked-function-expression/#iife) for my own refrence purpose.
+> The following have been taken from [Ben Alman's blog](https://web.archive.org/web/20171201033208/http://benalman.com/news/2010/11/immediately-invoked-function-expression/#iife) for my own refrence purpose. And, of course, the emojis are own additions 😜
 
 # Immediately-Invoked Function Expressions(IIFE)
 
@@ -136,3 +136,216 @@ Such parens typically indicate that the function expression will be immediately 
 
 ## Saving State with closures
 Just like when arguments may be passed when functions are invoked by their named identifier, they may also be passed when immediately invoking a function expression. And because any function defined inside another function can access the outer function’s passed-in arguments and variables (this relationship is known as a closure), an **Immediately-Invoked Function Expression** can be used to “lock in” values and effectively save state.
+
+```js
+// This doesn't work like you might think, because the value of `i` never
+
+// gets locked in. Instead, every link, when clicked (well after the loop
+
+// has finished executing), alerts the total number of elements, because
+
+// that's what the value of `i` actually is at that point.
+
+var elems = document.getElementsByTagName("a");
+
+for (var i = 0; i < elems.length; i++) {
+  elems[i].addEventListener(
+    "click",
+    function (e) {
+      e.preventDefault();
+      12;
+      alert("I am link #" + i);
+    },
+    "false"
+  );
+}
+
+// This works, because inside the IIFE, the value of `i` is locked in as
+
+// `lockedInIndex`. After the loop has finished executing, even though the
+
+// value of `i` is the total number of elements, inside the IIFE the value
+
+// of `lockedInIndex` is whatever the value passed into it (`i`) was when
+
+// the function expression was invoked, so when a link is clicked, the
+
+// correct value is alerted.
+
+var elems = document.getElementsByTagName("a");
+
+for (var i = 0; i < elems.length; i++) {
+  (function (lockedInIndex) {
+    elems[i].addEventListener(
+      "click",
+      function (e) {
+        e.preventDefault();
+
+        alert("I am link #" + lockedInIndex);
+      },
+      "false"
+    );
+  })(i);
+}
+
+// You could also use an IIFE like this, encompassing (and returning) only
+
+// the click handler function, and not the entire `addEventListener`
+
+// assignment. Either way, while both examples lock in the value using an
+
+// IIFE, I find the previous example to be more readable.
+
+var elems = document.getElementsByTagName("a");
+
+for (var i = 0; i < elems.length; i++) {
+  elems[i].addEventListener(
+    "click",
+    (function (lockedInIndex) {
+      return function (e) {
+        e.preventDefault();
+        alert("I am link #" + lockedInIndex);
+      };
+    })(i),
+    "false"
+  );
+}
+```
+
+*Note that in the last two examples, `lockedInIndex` could have just been called i without any issue, but using a differently named identifier as a function argument makes the concept significantly easier to explain*.
+
+One of the most advantageous side effects of Immediately-Invoked Function Expressions is that, because this unnamed, or anonymous, function expression is invoked immediately, without using an identifier, a closure can be used without polluting the current scope.
+
+## What’s wrong with “Self-executing anonymous function?”
+
+You’ve already seen it mentioned a few times, but in case it wasn’t clear, I’m proposing the term “Immediately-Invoked Function Expression”, and “IIFE” if you like acronyms. The pronunciation “iffy” was suggested to me, and I like it, so let’s go with that.
+
+What is an Immediately-Invoked Function Expression? It’s a function expression that gets invoked immediately. Just like the name would lead you to believe.
+
+I’d like to see JavaScript community members adopt the term “Immediately-Invoked Function Expression” and “IIFE” in their articles and presentations, because I feel it makes understanding this concept a little easier, and because the term “self-executing anonymous function” isn’t really even accurate:
+
+```js
+// This is a self-executing function. It's a function that executes (or
+
+// invokes) itself, recursively:
+
+function foo() {
+  foo();
+}
+
+// This is a self-executing anonymous function. Because it has no
+
+// identifier, it must use the  the `arguments.callee` property (which
+
+// specifies the currently executing function) to execute itself.
+
+var foo = function () {
+  arguments.callee();
+};
+
+// This *might* be a self-executing anonymous function, but only while the
+
+// `foo` identifier actually references it. If you were to change `foo` to
+
+// something else, you'd have a "used-to-self-execute" anonymous function. 🤣🤣🤣
+
+var foo = function () {
+  foo();
+};
+
+// Some people call this a "self-executing anonymous function" even though
+
+// it's not self-executing, because it doesn't invoke itself. 👈🏻 It is
+
+// immediately invoked, however.
+
+(function () {
+  /* code */
+})();
+
+// Adding an identifier to a function expression (thus creating a named
+
+// function expression) can be extremely helpful when debugging. Once named,
+
+// however, the function is no longer anonymous.
+
+(function foo() {
+  /* code */
+})();
+
+// IIFEs can also be self-executing, although this is, perhaps, not the most
+
+// useful pattern.
+
+(function () {
+  arguments.callee();
+})();
+
+(function foo() {
+  foo();
+})();
+
+// One last thing to note: this will cause an error in BlackBerry 5, because
+
+// inside a named function expression, that name is undefined. Awesome, huh?
+
+(function foo() {
+  foo();
+})();
+
+```
+
+Hopefully these examples have made it clear that the term “self-executing” is somewhat misleading, because it’s not the function that’s executing *itself*, even though the function is being executed. Also, “anonymous” is unnecessarily specific, since an Immediately Invoked Function Expression can be either anonymous or named. And as for my preferring “invoked” over “executed,” it’s a simple matter of alliteration; I think “IIFE” looks and sounds nicer than “IEFE.”
+
+So, that’s it. That’s my big idea.
+
+*Fun fact: because `arguments.callee` is deprecated in ECMAScript 5 strict mode it’s actually technically impossible to create a “self-executing anonymous function” in ECMAScript 5 strict mode.*
+
+## A final aside: The Module Pattern
+While I’m invoking function expressions, I’d be remiss if I didn’t at least mention the Module Pattern. If you’re not familiar with the Module Pattern in JavaScript, it’s similar to my first example, but with an Object being returned instead of a Function (and is generally implemented as a singleton, as in this example).
+```js
+// Create an anonymous function expression that gets invoked immediately,
+// and assign its *return value* to a variable. This approach "cuts out the
+// middleman" of the named `makeWhatever` function reference.
+//
+// As explained in the above "important note," even though parens are not
+// required around this function expression, they should still be used as a
+// matter of convention to help clarify that the variable is being set to
+// the function's *result* and not the function itself.
+
+var counter = (function () {
+  var i = 0;
+
+  return {
+    get: function () {
+      return i;
+    },
+
+    set: function (val) {
+      i = val;
+    },
+
+    increment: function () {
+      return ++i;
+    },
+  };
+})();
+
+// `counter` is an object with properties, which in this case happen to be
+
+// methods.
+
+counter.get(); // 0
+
+counter.set(3);
+
+counter.increment(); // 4
+
+counter.increment(); // 5
+
+counter.i; // undefined (`i` is not a property of the returned object)
+
+i; // ReferenceError: i is not defined (it only exists inside the closure)
+
+```
+
