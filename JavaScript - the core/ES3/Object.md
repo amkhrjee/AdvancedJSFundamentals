@@ -64,6 +64,8 @@ The rule is simple: if a property or a method is not found in the object itself(
 > Notice that `this` value in using an inherited method is set to the `original` object, but not to the prototype object in which the method is found.
 > i.e. In this example above `this.y` is taken from `b` and `c`, but not from `a`. However, `this.x` is taken from `a`, and again via the _prototype chain_ mechanism.
 
+> This means, `this.x` tries to find the property `x` in the original object but when it fails to find it there, it moves to the prototype object.
+
 If a prototype is not specified for an object explicitly, then the default value for `__proto__` is taken — `Object.prototype`. Object Object.prototype itself also has a `__proto__`, which is the final link of a chain and is set to `null`.
 
 The next figure shows the inheritance hierarchy of our `a`, `b` and `c` objects:

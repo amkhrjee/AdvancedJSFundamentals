@@ -5,20 +5,51 @@
 Example of function statement:
 
 ```js
-function a() {
+function bar() {
   //
 }
 ```
 
 This way of creating a function is called a function statement. That's it.
 
+This creates a function named(i.e., with an internal name of) `bar` and stores is it in a variable named `bar`.
+
+Hence, it creates the variable `bar` as a side-effect.
+
 ## ➡️ Function Expression
 
 ```js
-var b = function () {
+const foo = function bar() {
   //
 };
 ```
+
+Here `const foo` creates a variable named `foo`.
+
+The function expression creates a function named `bar`(again, an internal name) and assigns it to `foo`.
+
+No variable `bar` is created.
+
+## ➡️ Immediately Invoked Function Expression (IIFE)
+
+An IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined. The name IIFE is promoted by Ben Alman in [his blog](https://web.archive.org/web/20171201033208/http://benalman.com/news/2010/11/immediately-invoked-function-expression/#iife).
+
+```js
+(function () {
+  statements;
+})();
+```
+
+> This immediately-invoked function expression creates a function named `bar` and invokes it. There is no variable `bar`. The function isn't stored anywhere.
+
+It is a design pattern which is also known as **Self-Executing Anonymous Function** and contains two major parts:
+
+- The first is the anonymous function with lexical scope withing the `Grouping opertator ()`.
+- The second part creates the immediately invoked function expression () through which the JavaScript engine will directly interpret the function.
+
+### 🏢 Use Cases
+
+- **Avoid polluting the global namespace**: Because our application could include many functions and global variables from different source files, it's important to limit the number of global variables. If we have some initiation code that we don't need to use again, we could use the IIFE pattern. As we will not reuse the code again, using IIFE in this case is better than using a function declaration or a function expression.
 
 ## ⚡ Difference between FS and FE
 
@@ -82,3 +113,7 @@ Hope it's clear now!
 A programming language is said to have First-class functions when functions in that language are treated like any other variable. For example, in such a language, a function can be passed as an argument to other functions, can be returned by another function and can be assigned as a value to a variable.
 
 > Source: [MDN first-class functions](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function)
+
+## Further Reading 📗
+
+- [JS Design Patterns by Addy Osmani](https://addyosmani.com/resources/essentialjsdesignpatterns/book/)

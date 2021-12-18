@@ -2,7 +2,7 @@ console.log("start");
 
 setTimeout(function cb() {
   console.log("Callback");
-}, 1000);
+}, 0);
 
 console.log("End");
 
