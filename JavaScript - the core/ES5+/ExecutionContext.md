@@ -55,33 +55,6 @@ The `yield` statement here returns the value to the caller, and pops the context
 
 We shall now discuss the important components of an execution context; in particular we should see how ECMAScript runtime manages _variables storage_, and _scopes_ created by nested blocks of a code. This is the generic concept of _lexical environments_, which is used in JS to store data, and solve the _“Funarg problem” _ — with the mechanism of closures.
 
-Every execution context has an associated lexical environment.
-
-> **Lexical environment**: A lexical environment is a structure used to define association between identifiers appearing in the context with their values. Each environment can have a reference to an optional parent environment.
-
-So an environment is a storage of variables, functions, and classes defined in a scope.
-> ⭐ **Technically, an environment is a pair, consisting of an environment record (an actual storage table which maps identifiers to values), and a reference to the parent (which can be `null`).**
-
-For the code:
-
-```js
-let x = 10;
-let y = 20;
- 
-function foo(z) {
-  let x = 100;
-  return x + y + z;
-}
- 
-foo(30); // 150
-```
-The environment structures of the _global context_, and a context of the `foo` function would look as follows:
-
-![Environment Change](../../Assets/environment-chain.png)
-
-Logically this reminds us of the prototype chain which we’ve discussed above. And the rule for identifiers resolution is very similar: if a variable is not found in the own environment, there is an attempt to lookup it in the parent environment, in the parent of the parent, and so on — until the whole environment chain is considered.
-
-> **Identifier resolution**: the process of resolving a variable (binding) in an environment chain. An unresolved binding results to `ReferenceError`.
 
 
 
